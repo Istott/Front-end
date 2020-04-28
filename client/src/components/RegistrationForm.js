@@ -51,7 +51,7 @@ const RegistrationForm = props => {
 
   return (
     <div>
-      <form>
+      <form onSubmit={submitForm}>
         <div>Username:</div>
         <input id='username' name="username" type="text"  placeholder=' username' value={credentials.username} onChange={handleChanges} />
         <div>Password: </div>
@@ -59,7 +59,7 @@ const RegistrationForm = props => {
         <div>Confirm Password: </div>
         <input id='passwordConfirm' name="passwordConfirm" type="password" placeholder=' confirm password' value={credentials.passwordConfirm} onChange={handleChanges} />
         
-        <button onSubmit={submitForm}>Register</button>
+        <button>Register</button>
       </form>
     </div>
   );

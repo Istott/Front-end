@@ -66,10 +66,10 @@ display: block;
     /* display: flex;
     justify-content: center; */
 }
-.errors{
 
+/* .errors{
     border: 1px red solid;
-}
+} */
 
 .errors p {
     color: red !important;
