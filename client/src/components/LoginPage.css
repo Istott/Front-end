@@ -66,6 +66,14 @@ display: block;
     /* display: flex;
     justify-content: center; */
 }
+.errors{
+
+    border: 1px red solid;
+}
+
+.errors p {
+    color: red !important;
+}
 
 .container p {
     font-size: .9rem;

@@ -1,3 +1,124 @@
+
 .App {
   text-align: center;
+  background-color: #470B97;
+  border: 1px #470B97 solid;
+
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #470B97;
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+/* NavBar */
+
+.NavBar {
+  background-color: #470B97;
+}
+
+
+.linky a {
+  font-size: 1.6rem;
+  color: #c0c0c0;
+  text-decoration: none;
+  background-color: inherit;
+  float: center;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 8px 16px;
+  transition: 0.3s;
+  width: 100%;
+}
+
+.linky a:hover {
+  background-color: #c0c0c0;
+  color: #470B97;
+  border-radius: 8px;
+
+}
+
+/* new property page */
+
+.addProp {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  width: 100%;
+}
+
+.addProp p {
+  font-size: .9rem;
+  position: relative;
+  color: #C0C0C0;
+}
+
+.return {
+  margin: 1% 0;
+
+}
+
+.return a {
+  font-size: 1.6rem;
+  color: #c0c0c0;
+  text-decoration: none;
+  background-color: inherit;
+  float: center;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0 .5% .5% .5%;
+  transition: 0.3s;
+  width: 4.5%;
+  display: flex;
+  justify-content: flex-start;
+  margin: 0 0 0 1%;
+}
+
+.return a:hover {
+  background-color: #c0c0c0;
+  color: #470B97;
+  border-radius: 8px;
+
+}
+
+/* dashboard page */
+
+.cardStyle {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.dashboard {
+  background-color: #470B97;
+}
+
+/* PropertyCard.js */
+
+.dashCard {
+  background-color: #470B97;
+  border-radius: 10px;
+  width: 98%;
+  color: #C0C0C0;
+  margin: 1%;
+  padding: 2% 0;
 }

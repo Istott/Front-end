@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./App.css";
 import LoginPage from "./LoginPage";
-import axiosWithAuth from "../utils/axiosWithAuth"
 import { Route } from "react-router-dom";
 import ValueList from "./ValueList";
 import PrivateRoute from "./PrviateRoute"

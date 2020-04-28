@@ -16,7 +16,7 @@
 //submit button
 
 import React, { useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import  axiosWithAuth from '../utils/axiosWithAuth';
 
 const RegistrationForm = props => {
@@ -27,7 +27,9 @@ const RegistrationForm = props => {
     const [credentials, setCredentials] = useState({
         username: '',
         password: '',
-
+        passwordConfirm: '',
+        passError: '',
+        successMess: ''
     });
 
     const handleChanges = event => {
@@ -49,13 +51,15 @@ const RegistrationForm = props => {
 
   return (
     <div>
-      <form onSubmit={submitForm}>
+      <form>
         <div>Username:</div>
-        <input name="username" type="text" value={credentials.username} onChange={handleChanges} />
+        <input id='username' name="username" type="text"  placeholder=' username' value={credentials.username} onChange={handleChanges} />
         <div>Password: </div>
-        <input name="password" type="password" value={credentials.password} onChange={handleChanges} />
-        <br/>
-        <button>Register</button>
+        <input id='Password' name="password" type="password" placeholder=' password' value={credentials.password} onChange={handleChanges} />
+        <div>Confirm Password: </div>
+        <input id='passwordConfirm' name="passwordConfirm" type="password" placeholder=' confirm password' value={credentials.passwordConfirm} onChange={handleChanges} />
+        
+        <button onSubmit={submitForm}>Register</button>
       </form>
     </div>
   );
