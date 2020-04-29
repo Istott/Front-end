@@ -37,12 +37,14 @@ justify-content: space-around;
 
 const initialFormValues = {
   username: '',
-  password: ''
+  password: '',
+  confirmPassword: ''
 }
 
 const initialFormErrors = {
   username: '',
-  password: ''
+  password: '',
+  confirmPassword: ''
 }
 
 const formSchema = yup.object().shape({
@@ -54,8 +56,10 @@ const formSchema = yup.object().shape({
     .string()
     .min(6, 'Password Must be at least 6 characters long')
     .required('Password is Required'),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref('password'), null], 'Passwords must match')
 })
-
 
 
 function LoginPage(props) {
@@ -68,6 +72,7 @@ function LoginPage(props) {
 
 
   const handleChanges = event => {
+    event.preventDefault();
     // setCredentials({
     //       ...credentials,
     //         [event.target.name]: event.target.value
@@ -93,9 +98,9 @@ function LoginPage(props) {
       });
 
       setCredentials({
-      ...credentials,
-      [name]: value,
-    })
+        ...credentials,
+        [name]: value,
+     })
   }
 
   const loginToApp = event => {
@@ -116,8 +121,6 @@ function LoginPage(props) {
         setFormDisabled(!valid)
       })
   }, [credentials])
-
-  
 
   const TimelineComponent = () => (
     <Timeline
@@ -149,7 +152,13 @@ function LoginPage(props) {
 
                 </div>
                 <div className={`loginCard ${active ?'tabContent':'activeTab'}`}>
-                    <RegistrationForm setActive = {setActive} />
+                    <RegistrationForm 
+                      setActive={setActive}
+                      credentials={credentials}
+                      handleChanges={handleChanges}
+                      formDisabled={formDisabled}
+                      formErrors={formErrors}
+                    />
                 </div>
               </TopCard>
             </header>
