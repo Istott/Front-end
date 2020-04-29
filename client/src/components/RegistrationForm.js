@@ -28,7 +28,7 @@ const RegistrationForm = props => {
     formErrors,
   } = props
 
-    console.log(props)
+    // console.log(props)
 
     // const [credentials, setCredentials] = useState({
     //     username: '',
@@ -51,6 +51,7 @@ const RegistrationForm = props => {
       axiosWithAuth()
         .post('https://bw-essentialism-1.herokuapp.com/api/auth/register', credentials)
         .then(res => {
+          console.log(res)
           setActive(true);
           })
         .catch(err => console.log(err));
@@ -74,7 +75,7 @@ const RegistrationForm = props => {
         <div>Confirm Password: </div>
         <input id='confirmPassword' name="confirmPassword" type="password" placeholder=' confirm password' value={credentials.confirmPassword} onChange={handleChanges} />
         
-        <button disabled={formDisabled}>Register</button>
+        <button onClick={() => setActive(true)} disabled={formDisabled}>Register</button>
       </form>
     </div>
   );

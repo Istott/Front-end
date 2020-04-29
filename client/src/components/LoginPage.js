@@ -47,7 +47,7 @@ const initialFormErrors = {
   confirmPassword: ''
 }
 
-const formSchema = yup.object().shape({
+const formSchema = yup.object({
   username: yup
     .string()
     .min(3, 'userame must be atleast 3 characters')
@@ -72,7 +72,6 @@ function LoginPage(props) {
 
 
   const handleChanges = event => {
-    event.preventDefault();
     // setCredentials({
     //       ...credentials,
     //         [event.target.name]: event.target.value
@@ -107,8 +106,8 @@ function LoginPage(props) {
     event.preventDefault();
     axiosWithAuth().post('https://bw-essentialism-1.herokuapp.com/api/auth/login', credentials)
     .then(res => {
-      console.log(res)
-      localStorage.setItem('token', res.data.token);
+      // console.log(res)
+      window.localStorage.setItem('token', res.data.token);
       props.history.push('/essentials')
       
     })
@@ -122,54 +121,54 @@ function LoginPage(props) {
       })
   }, [credentials])
 
-  const TimelineComponent = () => (
-    <Timeline
-      target={
-        <div>
-          <div className="App">
-            <header className="App-header">
+  // const TimelineComponent = () => (
+  //   <Timeline
+  //     target={
+  //       <div>
+          // <div className="App">
+          //   <header className="App-header">
 
-              <TopCard>
-                <h1>Essentialism inc.</h1>
+          //     <TopCard>
+          //       <h1>Essentialism inc.</h1>
 
-                <div className={`loginCard ${active ?'activeTab':'tabContent'}`}>
-                  <h5>Login Here</h5>
+          //       <div className={`loginCard ${active ?'activeTab':'tabContent'}`}>
+          //         <h5>Login Here</h5>
 
-                  <div className='errors'>
-                    <p>{formErrors.username}</p>
-                    <p>{formErrors.password}</p>
-                </div>
+          //         <div className='errors'>
+          //           <p>{formErrors.username}</p>
+          //           <p>{formErrors.password}</p>
+          //       </div>
 
-                  <div className="login">
-                    <div>
-                      <form onSubmit={loginToApp}>
-                        <input value={credentials.username} name="username" type="text"  placeholder=' username' onChange={handleChanges} />
-                        <input value={credentials.password} name="password" type="password"  placeholder=' password' onChange={handleChanges} />
-                        <button disabled={formDisabled}>Login</button>
-                      </form>
-                    </div>
-                  </div>
+          //         <div className="login">
+          //           <div>
+          //             <form onSubmit={loginToApp}>
+          //               <input value={credentials.username} name="username" type="text"  placeholder=' username' onChange={handleChanges} />
+          //               <input value={credentials.password} name="password" type="password"  placeholder=' password' onChange={handleChanges} />
+          //               <button disabled={formDisabled}>Login</button>
+          //             </form>
+          //           </div>
+          //         </div>
 
-                </div>
-                <div className={`loginCard ${active ?'tabContent':'activeTab'}`}>
-                    <RegistrationForm 
-                      setActive={setActive}
-                      credentials={credentials}
-                      handleChanges={handleChanges}
-                      formDisabled={formDisabled}
-                      formErrors={formErrors}
-                    />
-                </div>
-              </TopCard>
-            </header>
-          </div>
-        </div>
-      }
-    >
-      <Tween from={{ x: '-20px', opacity: .5 }} to={{ x: '0px' }} />
-      <Tween from={{ opacity: .5 }} to={{ opacity: 1 }} />
-    </Timeline>
-  );
+          //       </div>
+          //       <div className={`loginCard ${active ?'tabContent':'activeTab'}`}>
+          //           <RegistrationForm 
+          //             setActive={setActive}
+          //             credentials={credentials}
+          //             handleChanges={handleChanges}
+          //             formDisabled={formDisabled}
+          //             formErrors={formErrors}
+          //           />
+          //       </div>
+          //     </TopCard>
+          //   </header>
+          // </div>
+  //       </div>
+  //     }
+  //   >
+  //     <Tween from={{ x: '-20px', opacity: .5 }} to={{ x: '0px' }} />
+  //     <Tween from={{ opacity: .5 }} to={{ opacity: 1 }} />
+  //   </Timeline>
+  // );
 
 
   return (
@@ -181,7 +180,44 @@ function LoginPage(props) {
         </Tab>
       </div>
 
-      <TimelineComponent></TimelineComponent>   
+      {/* <TimelineComponent></TimelineComponent>    */}
+      <div className="App">
+        <header className="App-header">
+
+          <TopCard>
+            <h1>Essentialism inc.</h1>
+
+            <div className={`loginCard ${active ?'activeTab':'tabContent'}`}>
+              <h5>Login Here</h5>
+
+              <div className='errors'>
+                <p>{formErrors.username}</p>
+                <p>{formErrors.password}</p>
+            </div>
+
+              <div className="login">
+                <div>
+                  <form onSubmit={loginToApp}>
+                    <input value={credentials.username} name="username" type="text"  placeholder=' username' onChange={handleChanges} />
+                    <input value={credentials.password} name="password" type="password"  placeholder=' password' onChange={handleChanges} />
+                    <button disabled={formDisabled}>Login</button>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+            <div className={`loginCard ${active ?'tabContent':'activeTab'}`}>
+                <RegistrationForm 
+                  setActive={setActive}
+                  credentials={credentials}
+                  handleChanges={handleChanges}
+                  formDisabled={formDisabled}
+                  formErrors={formErrors}
+                />
+            </div>
+          </TopCard>
+        </header>
+      </div>
 
 
       <p>	&#9400; 2020, Essentialism inc.</p>
