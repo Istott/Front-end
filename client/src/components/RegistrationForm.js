@@ -33,7 +33,7 @@ const RegistrationForm = props => {
     // const [credentials, setCredentials] = useState({
     //     username: '',
     //     password: '',
-    //     confirmPassword: 
+    //     confirmPassword: '',
     //     // passwordConfirm: '',
     //     // passError: '',
     //     // successMess: ''
@@ -69,13 +69,13 @@ const RegistrationForm = props => {
 
       <form onSubmit={submitForm}>
         <div>Username:</div>
-        <input id='username' name="username" type="text"  placeholder=' username' value={credentials.username} onChange={handleChanges} />
+        <input name="username" type="text"  placeholder=' username' value={credentials.username} onChange={handleChanges} />
         <div>Password: </div>
-        <input id='Password' name="password" type="password" placeholder=' password' value={credentials.password} onChange={handleChanges} />
+        <input name="password" type="password" placeholder=' password' value={credentials.password} onChange={handleChanges} />
         <div>Confirm Password: </div>
-        <input id='confirmPassword' name="confirmPassword" type="password" placeholder=' confirm password' value={credentials.confirmPassword} onChange={handleChanges} />
+        <input name="confirmPassword" type="password" placeholder=' confirm password' value={credentials.confirmPassword} onChange={handleChanges} />
         
-        <button onClick={() => setActive(true)} disabled={formDisabled}>Register</button>
+        <button disabled={formDisabled}>Register</button>
       </form>
     </div>
   );
