@@ -9,9 +9,11 @@ import React, {useState, useEffect} from 'react';
 // import LoginForm from './LoginForm';
 import styled from "styled-components";
 import RegistrationForm from './RegistrationForm';
-import { Tween, Timeline } from 'react-gsap';
+import User from './User'
+// import { Tween, Timeline } from 'react-gsap';
 import './LoginPage.css'
 import axiosWithAuth from "../utils/axiosWithAuth"
+import axios from 'axios'
 import * as yup from 'yup'
 
 const TopCard = styled.div`
@@ -35,16 +37,19 @@ justify-content: space-around;
 //   width: 100%;
 // `;
 
+const url = 'https://reqres.in/api/users'
+console.log(url)
+
 const initialFormValues = {
   username: '',
   password: '',
-  confirmPassword: ''
+  // confirmPassword: ''
 }
 
 const initialFormErrors = {
   username: '',
   password: '',
-  confirmPassword: ''
+  // confirmPassword: ''
 }
 
 const formSchema = yup.object({
@@ -56,13 +61,15 @@ const formSchema = yup.object({
     .string()
     .min(6, 'Password Must be at least 6 characters long')
     .required('Password is Required'),
-  confirmPassword: yup
-    .string()
-    .oneOf([yup.ref('password'), null], 'Passwords must match')
+  // confirmPassword: yup
+  //   .string()
+  //   .oneOf([yup.ref('password'), null], 'Passwords must match')
 })
 
 
 function LoginPage(props) {
+
+  const [users, setUsers] = useState([])
 
   const [active, setActive] = useState(true)
   const [credentials, setCredentials] = useState(initialFormValues);
@@ -121,55 +128,45 @@ function LoginPage(props) {
       })
   }, [credentials])
 
+
+  //mock data//
+  const getUsers = () => {
+    axios.get(`${url}`)
+      .then(res => {
+        console.log(res.data.data)
+        setUsers(res.data.data)
+      })
+      .catch(err => {
+        debugger
+      })
+  }
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+
+  //gsap//
   // const TimelineComponent = () => (
   //   <Timeline
   //     target={
   //       <div>
-          // <div className="App">
-          //   <header className="App-header">
-
-          //     <TopCard>
-          //       <h1>Essentialism inc.</h1>
-
-          //       <div className={`loginCard ${active ?'activeTab':'tabContent'}`}>
-          //         <h5>Login Here</h5>
-
-          //         <div className='errors'>
-          //           <p>{formErrors.username}</p>
-          //           <p>{formErrors.password}</p>
-          //       </div>
-
-          //         <div className="login">
-          //           <div>
-          //             <form onSubmit={loginToApp}>
-          //               <input value={credentials.username} name="username" type="text"  placeholder=' username' onChange={handleChanges} />
-          //               <input value={credentials.password} name="password" type="password"  placeholder=' password' onChange={handleChanges} />
-          //               <button disabled={formDisabled}>Login</button>
-          //             </form>
-          //           </div>
-          //         </div>
-
-          //       </div>
-          //       <div className={`loginCard ${active ?'tabContent':'activeTab'}`}>
-          //           <RegistrationForm 
-          //             setActive={setActive}
-          //             credentials={credentials}
-          //             handleChanges={handleChanges}
-          //             formDisabled={formDisabled}
-          //             formErrors={formErrors}
-          //           />
-          //       </div>
-          //     </TopCard>
-          //   </header>
-          // </div>
+  //         <div className='user-container'>
+  //           {
+  //             users.map(user => {
+  //               return(
+  //                 <User key={user.id} details={user}/>
+  //               )
+  //             })
+  //           }
+  //         </div>
   //       </div>
   //     }
   //   >
   //     <Tween from={{ x: '-20px', opacity: .5 }} to={{ x: '0px' }} />
-  //     <Tween from={{ opacity: .5 }} to={{ opacity: 1 }} />
+  //     <Tween from={{ opacity: .5 }} to={{ opacity: 1}} />
   //   </Timeline>
   // );
-
 
   return (
     <div className='container'>
@@ -180,7 +177,6 @@ function LoginPage(props) {
         </Tab>
       </div>
 
-      {/* <TimelineComponent></TimelineComponent>    */}
       <div className="App">
         <header className="App-header">
 
@@ -216,6 +212,16 @@ function LoginPage(props) {
                 />
             </div>
           </TopCard>
+          {/* <TimelineComponent></TimelineComponent>   */}
+          <div className='user-container'>
+            {
+              users.map(user => {
+                return(
+                  <User key={user.id} details={user}/>
+                )
+              })
+            }
+          </div> 
         </header>
       </div>
 

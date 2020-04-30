@@ -64,7 +64,7 @@ const RegistrationForm = props => {
       <div className='errors'>
         <p>{formErrors.username}</p>
         <p>{formErrors.password}</p>
-        <p>{formErrors.confirmPassword}</p>
+        {/* <p>{formErrors.confirmPassword}</p> */}
       </div>
 
       <form onSubmit={submitForm}>
@@ -72,9 +72,9 @@ const RegistrationForm = props => {
         <input name="username" type="text"  placeholder=' username' value={credentials.username} onChange={handleChanges} />
         <div>Password: </div>
         <input name="password" type="password" placeholder=' password' value={credentials.password} onChange={handleChanges} />
-        <div>Confirm Password: </div>
+        {/* <div>Confirm Password: </div>
         <input name="confirmPassword" type="password" placeholder=' confirm password' value={credentials.confirmPassword} onChange={handleChanges} />
-        
+         */}
         <button disabled={formDisabled}>Register</button>
       </form>
     </div>
