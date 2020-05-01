@@ -15,47 +15,67 @@
 //password
 //submit button
 
-import React, { useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+// import axios from 'axios';
 import  axiosWithAuth from '../utils/axiosWithAuth';
 
 const RegistrationForm = props => {
+  const {
+    setActive,
+    credentials,
+    handleChanges,
+    formDisabled,
+    formErrors,
+  } = props
 
+    // console.log(props)
 
-    console.log(props)
+    // const [credentials, setCredentials] = useState({
+    //     username: '',
+    //     password: '',
+    //     confirmPassword: '',
+    //     // passwordConfirm: '',
+    //     // passError: '',
+    //     // successMess: ''
+    // });
 
-    const [credentials, setCredentials] = useState({
-        username: '',
-        password: '',
-
-    });
-
-    const handleChanges = event => {
-        setCredentials( {
-              ...credentials,
-                [event.target.name]: event.target.value
-              } )
-          }
+    // const handleChanges = event => {
+    //     setCredentials( {
+    //           ...credentials,
+    //             [event.target.name]: event.target.value
+    //           } )
+    //       }
 
     const submitForm = event => {
       event.preventDefault();
       axiosWithAuth()
         .post('https://bw-essentialism-1.herokuapp.com/api/auth/register', credentials)
         .then(res => {
-          props.setActive(true);
+          console.log(res)
+          setActive(true);
           })
         .catch(err => console.log(err));
     };
 
   return (
     <div>
+      <h5>Register Here</h5>
+
+      <div className='errors'>
+        <p>{formErrors.username}</p>
+        <p>{formErrors.password}</p>
+        {/* <p>{formErrors.confirmPassword}</p> */}
+      </div>
+
       <form onSubmit={submitForm}>
         <div>Username:</div>
-        <input name="username" type="text" value={credentials.username} onChange={handleChanges} />
+        <input name="username" type="text"  placeholder=' username' value={credentials.username} onChange={handleChanges} />
         <div>Password: </div>
-        <input name="password" type="password" value={credentials.password} onChange={handleChanges} />
-        <br/>
-        <button>Register</button>
+        <input name="password" type="password" placeholder=' password' value={credentials.password} onChange={handleChanges} />
+        {/* <div>Confirm Password: </div>
+        <input name="confirmPassword" type="password" placeholder=' confirm password' value={credentials.confirmPassword} onChange={handleChanges} />
+         */}
+        <button disabled={formDisabled}>Register</button>
       </form>
     </div>
   );
